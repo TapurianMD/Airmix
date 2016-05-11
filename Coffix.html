@@ -1,0 +1,147 @@
+<!-- Copyright © 2016, Xerxes Langerudi. All rights reserved. -->
+
+<!doctype html>
+
+<html>
+<head>
+	<title>Coffix</title>
+</head>
+<body>
+
+<canvas width="1266" height="650"></canvas>
+
+<script type="text/javascript">
+
+myCanvasX = 1266;
+myCanvasY = 650;
+
+var cx = document.querySelector("canvas").getContext("2d");
+
+function drawCoffixCup(x, y)
+{
+	cx.beginPath();
+
+	var liquidLevel = 30;
+	var liquidColor = "#4c1900";
+
+	// Cup
+	cx.fillStyle = "white";
+
+	cx.moveTo(x, y);
+	cx.lineTo(x, y + 40);
+	cx.lineTo(x + 30, y + 40);
+	cx.lineTo(x + 30, y);
+
+	// Cup handle
+	cx.moveTo(x + 30, y + 12);
+	cx.lineTo(x + 38, y + 12);
+	cx.lineTo(x + 38, y + 28);
+	cx.lineTo(x + 30, y + 28);
+
+	cx.stroke();
+	cx.fill();
+
+	cx.fillStyle = liquidColor;
+
+	cx.fillRect(x + 1, y + 7, 28, 33);
+
+	cx.stroke();
+
+	// Write Coffix
+	cx.fillStyle = "white";
+	cx.font = "8px Verdana";
+	cx.fillText("Coffix", x + 2, y + 20);
+
+	cx.closePath();
+}
+
+function drawGlider(x, y, mode)
+{
+
+	cx.moveTo(x, y);
+
+	// Upper
+	cx.beginPath();
+	cx.arc(x + 15, y + 20, 160, 4.00, 5.42);
+	cx.stroke();
+
+	// Bottom
+	cx.beginPath();
+	cx.arc(x + 15, y + 116, 240, 4.26, 5.16);
+	cx.stroke();
+
+	// Left line
+	cx.moveTo(x - 88, y - 100);
+	cx.lineTo(x, y);
+
+	// Mid line
+	cx.moveTo(x + 15, y - 123);
+	cx.lineTo(x + 15, y);
+
+	// Right line
+	cx.moveTo(x + 118, y - 100);
+	cx.lineTo(x + 30, y);
+
+	cx.strokeStyle = "fuchsia";
+	cx.lineWidth = 2;
+	cx.stroke();
+
+	cx.closePath();
+}
+
+function drawCoffixUnit(x, y, cupY)
+{
+	drawGlider(x, y);
+
+	drawCoffixCup(x, cupY? cupY : y);
+}
+
+var i = 0;
+var y = 0;
+
+airShow = setInterval(function()
+{
+	cx.fillRect(0, 0, myCanvasX, myCanvasY);
+
+	y = i < 300? i + 180: y; 
+
+	drawCoffixUnit(578, 180 + i, y)
+
+	drawCoffixUnit(578 - 300, 180 - 150 + i)
+
+	drawCoffixUnit(578 + 300, 180 - 150 + i)
+
+	drawCoffixUnit(578 - 300, 180 + 150 + i)
+
+	drawCoffixUnit(578 + 300, 180 + 150 + i)
+
+	i++;
+
+	i > 761? clearInterval(airShow) : 0;
+
+	if (i > 220)
+	{
+		// Stand
+		cx.beginPath();
+		cx.fillStyle = "#4c1900";
+		cx.fillRect(578 - 50, 530, 140, 40);
+		cx.stroke();
+	}
+
+	cx.fillStyle = "white";
+
+	if (i > 225)
+	{
+		// Write Coffix
+		cx.beginPath();
+		cx.font = "30px Verdana";
+		cx.fillText("Coffix", 578 - 25, 560);
+	}
+
+}, 20);
+
+</script>
+
+</body>
+</html>
+
