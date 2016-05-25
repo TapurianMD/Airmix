@@ -4,7 +4,7 @@
 
 <html>
 <head>
-	<title>Coffix</title>
+	<title>Airmix</title>
 </head>
 <body>
 
@@ -17,40 +17,57 @@ myCanvasY = 650;
 
 var cx = document.querySelector("canvas").getContext("2d");
 
-function drawCoffixCup(x, y)
+function drawAirmixCup(x, y)
 {
+	// This function is 100 % scalable
 	cx.beginPath();
 
 	var liquidLevel = 30;
 	var liquidColor = "#4c1900";
 
+	var cupSize = 1;
+	var cupHeight = cupSize * 40;
+	var cupWidth = cupSize * 30;
+
+	var cupHandleWidth = cupSize * 8;
+	var cupHandleUpper = cupSize * 12;
+	var cupHandleLower = cupSize * 28;
+
+	var fillHeight = cupSize * 33;
+	var fillWidth = cupSize * 30 - 2;
+	var fillTo = cupSize * 7;
+
+	var fontSize = cupSize * 8;
+	var textX = cupSize * 2;
+	var textY = cupSize * 20;
+
 	// Cup
 	cx.fillStyle = "white";
 
 	cx.moveTo(x, y);
-	cx.lineTo(x, y + 40);
-	cx.lineTo(x + 30, y + 40);
-	cx.lineTo(x + 30, y);
+	cx.lineTo(x, y + cupHeight);
+	cx.lineTo(x + cupWidth, y + cupHeight);
+	cx.lineTo(x + cupWidth, y);
 
 	// Cup handle
-	cx.moveTo(x + 30, y + 12);
-	cx.lineTo(x + 38, y + 12);
-	cx.lineTo(x + 38, y + 28);
-	cx.lineTo(x + 30, y + 28);
+	cx.moveTo(x + cupWidth, y + cupHandleUpper);
+	cx.lineTo(x + cupWidth + cupHandleWidth, y + cupHandleUpper);
+	cx.lineTo(x + cupWidth + cupHandleWidth, y + cupHandleLower);
+	cx.lineTo(x + cupWidth, y + cupHandleLower);
 
 	cx.stroke();
 	cx.fill();
 
 	cx.fillStyle = liquidColor;
 
-	cx.fillRect(x + 1, y + 7, 28, 33);
+	cx.fillRect(x + 1, y + fillTo, fillWidth, fillHeight);
 
 	cx.stroke();
 
-	// Write Coffix
-	cx.fillStyle = "white";
-	cx.font = "8px Verdana";
-	cx.fillText("Coffix", x + 2, y + 20);
+	// Write Airmix
+	cx.fillStyle = "gold";
+	cx.font = fontSize + "px Verdana";
+	cx.fillText("Airmix", x + textX, y + textY);
 
 	cx.closePath();
 }
@@ -89,11 +106,11 @@ function drawGlider(x, y, mode)
 	cx.closePath();
 }
 
-function drawCoffixUnit(x, y, cupY)
+function drawAirmixUnit(x, y, cupY)
 {
 	drawGlider(x, y);
 
-	drawCoffixCup(x, cupY? cupY : y);
+	drawAirmixCup(x, cupY? cupY : y);
 }
 
 var i = 0;
@@ -101,19 +118,21 @@ var y = 0;
 
 airShow = setInterval(function()
 {
+	cx.fillStyle = "white";
+
 	cx.fillRect(0, 0, myCanvasX, myCanvasY);
 
 	y = i < 300? i + 180: y; 
 
-	drawCoffixUnit(578, 180 + i, y)
+	drawAirmixUnit(578, 180 + i, y)
 
-	drawCoffixUnit(578 - 300, 180 - 150 + i)
+	drawAirmixUnit(578 - 300, 180 - 150 + i)
 
-	drawCoffixUnit(578 + 300, 180 - 150 + i)
+	drawAirmixUnit(578 + 300, 180 - 150 + i)
 
-	drawCoffixUnit(578 - 300, 180 + 150 + i)
+	drawAirmixUnit(578 - 300, 180 + 150 + i)
 
-	drawCoffixUnit(578 + 300, 180 + 150 + i)
+	drawAirmixUnit(578 + 300, 180 + 150 + i)
 
 	i++;
 
@@ -132,10 +151,12 @@ airShow = setInterval(function()
 
 	if (i > 225)
 	{
-		// Write Coffix
+		cx.fillStyle = "gold";
+
+		// Write Airmix
 		cx.beginPath();
 		cx.font = "30px Verdana";
-		cx.fillText("Coffix", 578 - 25, 560);
+		cx.fillText("Airmix", 578 - 30, 560);
 	}
 
 }, 20);
@@ -144,4 +165,3 @@ airShow = setInterval(function()
 
 </body>
 </html>
-
