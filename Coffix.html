@@ -4,7 +4,7 @@
 
 <html>
 <head>
-	<title>Airmix</title>
+	<title>HighMix</title>
 </head>
 <body>
 
@@ -17,9 +17,10 @@ myCanvasY = 650;
 
 var cx = document.querySelector("canvas").getContext("2d");
 
-function drawAirmixCup(x, y)
+function drawHighMixCup(x, y)
 {
 	// This function is 100 % scalable
+
 	cx.beginPath();
 
 	var liquidLevel = 30;
@@ -37,7 +38,7 @@ function drawAirmixCup(x, y)
 	var fillWidth = cupSize * 30 - 2;
 	var fillTo = cupSize * 7;
 
-	var fontSize = cupSize * 8;
+	var fontSize = cupSize * 6;
 	var textX = cupSize * 2;
 	var textY = cupSize * 20;
 
@@ -64,40 +65,41 @@ function drawAirmixCup(x, y)
 
 	cx.stroke();
 
-	// Write Airmix
+	// Write HighMix
 	cx.fillStyle = "gold";
 	cx.font = fontSize + "px Verdana";
-	cx.fillText("Airmix", x + textX, y + textY);
+	cx.fillText("HighMix", x + textX, y + textY);
 
 	cx.closePath();
 }
 
 function drawGlider(x, y, mode)
 {
+	// This function is 100 % scalable
 
-	cx.moveTo(x, y);
+	var gliderSize = 1;
 
 	// Upper
 	cx.beginPath();
-	cx.arc(x + 15, y + 20, 160, 4.00, 5.42);
+	cx.arc(x + (15 * gliderSize), y + (20 * gliderSize), 160 * gliderSize, 4.00, 5.42);
 	cx.stroke();
 
 	// Bottom
 	cx.beginPath();
-	cx.arc(x + 15, y + 116, 240, 4.26, 5.16);
+	cx.arc(x + (15 * gliderSize), y + (116 * gliderSize), 240 * gliderSize, 4.26, 5.16);
 	cx.stroke();
 
 	// Left line
-	cx.moveTo(x - 88, y - 100);
+	cx.moveTo(x - (90 * gliderSize), y - (100 * gliderSize));
 	cx.lineTo(x, y);
 
 	// Mid line
-	cx.moveTo(x + 15, y - 123);
-	cx.lineTo(x + 15, y);
+	cx.moveTo(x + (15 * gliderSize), y - (123 * gliderSize));
+	cx.lineTo(x + (15 * gliderSize), y);
 
 	// Right line
-	cx.moveTo(x + 118, y - 100);
-	cx.lineTo(x + 30, y);
+	cx.moveTo(x + (118 * gliderSize), y - (100 * gliderSize));
+	cx.lineTo(x + (30 * gliderSize), y);
 
 	cx.strokeStyle = "fuchsia";
 	cx.lineWidth = 2;
@@ -106,11 +108,11 @@ function drawGlider(x, y, mode)
 	cx.closePath();
 }
 
-function drawAirmixUnit(x, y, cupY)
+function drawHighMixUnit(x, y, cupY)
 {
 	drawGlider(x, y);
 
-	drawAirmixCup(x, cupY? cupY : y);
+	drawHighMixCup(x, cupY? cupY : y);
 }
 
 var i = 0;
@@ -124,15 +126,15 @@ airShow = setInterval(function()
 
 	y = i < 300? i + 180: y; 
 
-	drawAirmixUnit(578, 180 + i, y)
+	drawHighMixUnit(578, 180 + i, y)
 
-	drawAirmixUnit(578 - 300, 180 - 150 + i)
+	drawHighMixUnit(578 - 300, 180 - 150 + i)
 
-	drawAirmixUnit(578 + 300, 180 - 150 + i)
+	drawHighMixUnit(578 + 300, 180 - 150 + i)
 
-	drawAirmixUnit(578 - 300, 180 + 150 + i)
+	drawHighMixUnit(578 - 300, 180 + 150 + i)
 
-	drawAirmixUnit(578 + 300, 180 + 150 + i)
+	drawHighMixUnit(578 + 300, 180 + 150 + i)
 
 	i++;
 
@@ -153,10 +155,10 @@ airShow = setInterval(function()
 	{
 		cx.fillStyle = "gold";
 
-		// Write Airmix
+		// Write HighMix
 		cx.beginPath();
-		cx.font = "30px Verdana";
-		cx.fillText("Airmix", 578 - 30, 560);
+		cx.font = "23px Verdana";
+		cx.fillText("HighMix", 578 - 31, 555);
 	}
 
 }, 20);
