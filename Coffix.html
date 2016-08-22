@@ -17,7 +17,7 @@ myCanvasY = 650;
 
 var cx = document.querySelector("canvas").getContext("2d");
 
-function drawHighMixCup(x, y)
+function drawHighMixCup(x, y, cupSize)
 {
 	// This function is 100 % scalable
 
@@ -26,7 +26,6 @@ function drawHighMixCup(x, y)
 	var liquidLevel = 30;
 	var liquidColor = "#4c1900";
 
-	var cupSize = 1;
 	var cupHeight = cupSize * 40;
 	var cupWidth = cupSize * 30;
 
@@ -73,11 +72,9 @@ function drawHighMixCup(x, y)
 	cx.closePath();
 }
 
-function drawGlider(x, y, mode)
+function drawGlider(x, y, gliderSize, mode)
 {
 	// This function is 100 % scalable
-
-	var gliderSize = 1;
 
 	// Upper
 	cx.beginPath();
@@ -110,9 +107,9 @@ function drawGlider(x, y, mode)
 
 function drawHighMixUnit(x, y, cupY)
 {
-	drawGlider(x, y);
+	drawGlider(x, y, 1);
 
-	drawHighMixCup(x, cupY? cupY : y);
+	drawHighMixCup(x, cupY? cupY : y, 1);
 }
 
 var i = 0;
@@ -167,3 +164,4 @@ airShow = setInterval(function()
 
 </body>
 </html>
+
